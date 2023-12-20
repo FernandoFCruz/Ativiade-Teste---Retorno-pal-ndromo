@@ -1,0 +1,22 @@
+org: cruzfernando
+app: sls-palindromo
+service: sls-palindromo
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'dev'} 
+  region: ${opt:region, 'us-east-1'} 
+  memorySize: 128
+  timeout: 3
+
+functions:
+  index:
+    handler: index.handler
+    description : Return next Palidrome 
+    events:
+     - http:
+          path: /
+          method: get
+          cors: true
+        
